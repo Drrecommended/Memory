@@ -75,6 +75,8 @@ const cards = [
     }
     ]
 
+//shuffle array    
+
 let shuffle = function shuffleCards(cards) {
     let currentIndex = cards.length
     var temporaryValue
@@ -94,40 +96,64 @@ let shuffle = function shuffleCards(cards) {
 
 shuffle(cards)
 
-const str = cards.map(item => {
-return `<div data-id="${item.myCard}" class="card">
-<div class="back"></div>
-<div class="front"><img src="${item.img}"></div>
-</div>`
-}).join('')
-$('.cards').html(str)
-let card1
-let card2
-$('.card').on('click', function () {
-$(this).addClass('active')
-myCard = $(this).data('id')
-if (card1 === undefined) {
-    card1 = $(this)
+const grid = document.querySelector('.cards')
+let cardsChosen = []
+let cardsChosenId = []
+let cardsWon = []
+let lives = 8
 
-    timer1 = setTimeout(() => {
-        $(this).removeClass('active')
-    }, 1000) 
-} else {
-    if (card2 === undefined) {
-        card2 = $(this)
-        timer2 = setTimeout(() => {
-            $(this).removeClass('active')
-        }, 1000)
-    } 
-} if (card1 === card2) {
-    $(this).removeClass('active')
+$('#lives').html("LIVES:" + lives)
+
+//create board with cards
+
+function createBoard() {
+    for (let i = 0; i < cards.length; i++) {
+        let card = document.createElement('img')
+        card.setAttribute('src', 'pictures/pangolin.jpg')
+        card.setAttribute('data-id', i)
+        card.addEventListener('click', flip)
+        grid.appendChild(card)
+    }
 }
-},)
 
-// function timer = setTimeout(() => {
-//     if (str === str) {
-//         $(this).removeClass('active')
-//     }
-// }, 1000)
+//check for match
+
+function checkMatch() {
+    let choice = document.querySelectorAll('img')
+    const optionOneId = cardsChosenId[0]
+    const optionTwoId = cardsChosenId[1]
+    if (cardsChosen[0] === cardsChosen[1]) {
+        alert('You found a match')
+        choice[optionOneId].setAttribute('src', 'pictures/bat.png')
+        choice[optionTwoId].setAttribute('src', 'pictures/bat.png')
+        cardsWon.push(cardsChosen)
+    } else {
+        choice[optionOneId].setAttribute('src', 'pictures/pangolin.jpg')
+        choice[optionTwoId].setAttribute('src', 'pictures/pangolin.jpg')
+        alert('SAaAARRRSSs')
+    }
+    cardsChosen = []
+    cardsChosenId = []
+    if (cardsWon.length === cards.length/2) {
+        resultDisplay.textContent = 'YOU SURVIVED'
+    } 
+
+}
+
+//flip card
+
+function flip() {
+    let cardId = this.getAttribute('data-id')
+    cardsChosen.push(cards[cardId].myCard)
+    cardsChosenId.push(cardId)
+    this.setAttribute('src', cards[cardId].img)
+    if (cardsChosen.length === 2) {
+        setTimeout(checkMatch, 500)
+    }
+}
+
+
+
+createBoard()
 
 })

@@ -4,44 +4,32 @@
     box-sizing: border-box;
 }
 
-.board {
-    
-}
+#lives {
+    position: absolute;
+    margin-left: 23%;
+    margin-top: -5%;
+    padding: 10px;
+    background-color: dimgray;
 
+}
 
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content:  center;
-    width: 80%;
-    margin-left: 10%;
+    justify-content: center;
+    width: 54%;
+    margin-left: 23%;
+    margin-top: 7.5%;
 }
 
-.card {
-    display: inline-block;
-    width: 128px;
-    height: 128px;
-    background-color: dimgray;
-    margin: 40px 20px 20px 20px;
-    cursor: pointer; 
-    position: relative;
-    transform: rotate3d();
-    transition: ease;
-    /* background-image: url('pictures/pangolin.jpg'); */
-}
+/* .cards img {
+    justify-content: space-evenly;
+} */
 
-.card .front {
-    display: none;
-}
-
-.card.active .front {
-    display: block;
-}
-
-.card:hover {
+/* .cards:hover img {
     box-shadow: inset 0px 0px 0px 3px black;
     box-sizing: border-box;
-}
+} */
 
 body {
     background-image: url('pictures/covidbackground.jpg');
