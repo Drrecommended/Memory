@@ -10,26 +10,19 @@
     margin-top: -5%;
     padding: 10px;
     background-color: dimgray;
+}
 
+#timer {
+    
 }
 
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 54%;
-    margin-left: 23%;
+    width: 100%;
+    margin-left: 0, auto;
     margin-top: 7.5%;
 }
-
-/* .cards img {
-    justify-content: space-evenly;
-} */
-
-/* .cards:hover img {
-    box-shadow: inset 0px 0px 0px 3px black;
-    box-sizing: border-box;
-} */
 
 body {
     background-image: url('pictures/covidbackground.jpg');
@@ -44,4 +37,8 @@ body {
     font-size: 4rem;
     background-color: dimgray;
     border-bottom: 2px floralwhite;
+}
+
+.card-box {
+    width: 40%;
 }

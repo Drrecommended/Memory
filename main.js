@@ -101,6 +101,7 @@ let cardsChosen = []
 let cardsChosenId = []
 let cardsWon = []
 let lives = 8
+let counter = document.querySelector('#lives')
 
 $('#lives').html("LIVES:" + lives)
 
@@ -128,6 +129,8 @@ function checkMatch() {
         choice[optionTwoId].setAttribute('src', 'pictures/bat.png')
         cardsWon.push(cardsChosen)
     } else {
+        lives--
+        console.log(lives)
         choice[optionOneId].setAttribute('src', 'pictures/pangolin.jpg')
         choice[optionTwoId].setAttribute('src', 'pictures/pangolin.jpg')
         alert('SAaAARRRSSs')
@@ -136,9 +139,13 @@ function checkMatch() {
     cardsChosenId = []
     if (cardsWon.length === cards.length/2) {
         resultDisplay.textContent = 'YOU SURVIVED'
-    } 
-
+    } else  if (lives === 0) {
+        resultDisplay.textContent = 'you died'
+        createBoard()
+    }
 }
+
+//handle score 
 
 //flip card
 
