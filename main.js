@@ -101,9 +101,13 @@ let cardsChosen = []
 let cardsChosenId = []
 let cardsWon = []
 let lives = 8
+let minutes = 5
+let seconds = 00
+let timeClock = document.querySelector('#timer')
 let counter = document.querySelector('#lives')
 
-$('#lives').html("LIVES:" + lives)
+$('#lives').html('LIVES:' + lives)
+$('#timer').html('TIMER: ' + minutes + ' : ' + seconds)
 
 //create board with cards
 
@@ -130,6 +134,7 @@ function checkMatch() {
         cardsWon.push(cardsChosen)
     } else {
         lives--
+        $('#lives').html('LIVES: ' + lives)
         console.log(lives)
         choice[optionOneId].setAttribute('src', 'pictures/pangolin.jpg')
         choice[optionTwoId].setAttribute('src', 'pictures/pangolin.jpg')
@@ -145,7 +150,9 @@ function checkMatch() {
     }
 }
 
-//handle score 
+//handle timer
+
+function timer() {}
 
 //flip card
 
