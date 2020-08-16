@@ -7,7 +7,13 @@
 #lives {
     position: absolute;
     margin-left: 23%;
-    background-color: dimgray;
+    color: white;
+}
+
+#moves {
+    color: white;
+    position: absolute;
+    margin-left: 23%;
 }
 
 #timer {
@@ -23,7 +29,7 @@
 }
 
 body {
-    background-image: url('pictures/covidbackground.jpg');
+    /* background-image: url('pictures/covidbackground.jpg'); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

@@ -73,7 +73,7 @@ const cards = [
         myCard: 9,
         img: 'pictures/covid9.png'
     }
-    ]
+]
 
 //shuffle array    
 
@@ -100,18 +100,24 @@ const grid = document.querySelector('.cards')
 let cardsChosen = []
 let cardsChosenId = []
 let cardsWon = []
-let lives = 8
-let minutes = 5
-let seconds = 00
-let timeClock = document.querySelector('#timer')
-let counter = document.querySelector('#lives')
+var minutes
+var seconds = 0
+var lives = 2
+var moves = 0
+// let timeClock = document.querySelector('#timer')
+// let counter = document.querySelector('#lives')
+let module = document.getElementById('menu-cover')
 
-$('#lives').html('LIVES:' + lives)
+$('#Moves').html('MOVES:' + moves)
+$('#Lives').html('LIVES:' + lives)
 $('#timer').html('TIMER: ' + minutes + ' : ' + seconds)
+
 
 //create board with cards
 
 function createBoard() {
+    shuffle(cards)
+    moves = 0
     for (let i = 0; i < cards.length; i++) {
         let card = document.createElement('img')
         card.setAttribute('src', 'pictures/pangolin.jpg')
@@ -134,25 +140,38 @@ function checkMatch() {
         cardsWon.push(cardsChosen)
     } else {
         lives--
-        $('#lives').html('LIVES: ' + lives)
-        console.log(lives)
+        moves++
+        $('#Moves').html('MOVES:' + moves)
+        $('#Lives').html('LIVES:' + lives)
         choice[optionOneId].setAttribute('src', 'pictures/pangolin.jpg')
         choice[optionTwoId].setAttribute('src', 'pictures/pangolin.jpg')
-        alert('SAaAARRRSSs')
     }
     cardsChosen = []
     cardsChosenId = []
-    if (cardsWon.length === cards.length/2) {
-        resultDisplay.textContent = 'YOU SURVIVED'
-    } else  if (lives === 0) {
-        resultDisplay.textContent = 'you died'
+    if (lives === 0) {
+        alert('you lose')
         createBoard()
     }
 }
+ //handle win or loss
 
+// function handleGame() {
+//     if (cardsWon.length === cards.length/2) {
+//         alert = 'YOU SURVIVED'
+//     } else {
+//         alert = 'YOU ded'
+//         createBoard()
+//     } 
+// }
 //handle timer
 
-function timer() {}
+function time() {
+    nowTime = setInterval(function () {
+        $timer.text(`${seconds}`)
+        seconds = seconds + 1
+    }, 1000);
+}
+
 
 //flip card
 
@@ -162,7 +181,7 @@ function flip() {
     cardsChosenId.push(cardId)
     this.setAttribute('src', cards[cardId].img)
     if (cardsChosen.length === 2) {
-        setTimeout(checkMatch, 500)
+        setTimeout(checkMatch, 500) 
     }
 }
 
