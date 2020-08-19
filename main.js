@@ -100,8 +100,6 @@ const grid = document.querySelector('.cards')
 let cardsChosen = []
 let cardsChosenId = []
 let cardsWon = []
-var minutes
-var seconds = 0
 var lives = 2
 var moves = 0
 // let timeClock = document.querySelector('#timer')
@@ -110,14 +108,13 @@ let module = document.getElementById('menu-cover')
 
 $('#Moves').html('MOVES:' + moves)
 $('#Lives').html('LIVES:' + lives)
-$('#timer').html('TIMER: ' + minutes + ' : ' + seconds)
+
 
 
 //create board with cards
 
 function createBoard() {
-    shuffle(cards)
-    moves = 0
+    let allCards
     for (let i = 0; i < cards.length; i++) {
         let card = document.createElement('img')
         card.setAttribute('src', 'pictures/pangolin.jpg')
@@ -125,6 +122,7 @@ function createBoard() {
         card.addEventListener('click', flip)
         grid.appendChild(card)
     }
+    
 }
 
 //check for match
@@ -134,7 +132,7 @@ function checkMatch() {
     const optionOneId = cardsChosenId[0]
     const optionTwoId = cardsChosenId[1]
     if (cardsChosen[0] === cardsChosen[1]) {
-        alert('You found a match')
+        // alert('You found a match')
         choice[optionOneId].setAttribute('src', 'pictures/bat.png')
         choice[optionTwoId].setAttribute('src', 'pictures/bat.png')
         cardsWon.push(cardsChosen)
@@ -149,23 +147,22 @@ function checkMatch() {
     cardsChosen = []
     cardsChosenId = []
     if (lives === 0) {
-        alert('you lose')
-        createBoard()
+        alert('you alive')
+        createBoard().then
     }
 }
  //handle win or loss
 
-// function handleGame() {
-//     if (cardsWon.length === cards.length/2) {
-//         alert = 'YOU SURVIVED'
-//     } else {
-//         alert = 'YOU ded'
-//         createBoard()
-//     } 
-// }
-//handle timer
+//  function gameOver(moves) {
+//     $('#winnerText').text(`In ${seconds} seconds, you did a total of ${moves} moves. Well done!`);
+//     $('#winnerModal').modal('toggle')
+//  }
 
-function time() {
+//handle timer
+var minutes = 00
+var seconds = 00
+var timer = document.querySelector('#timer')
+function startTimer() {
     nowTime = setInterval(function () {
         $timer.text(`${seconds}`)
         seconds = seconds + 1
