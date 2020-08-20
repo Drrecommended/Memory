@@ -16,6 +16,11 @@
     margin-left: 23%;
 }
 
+.memory-card {
+    margin: 5px;
+    position: relative;
+  }
+
 #timer {
 
 }
@@ -26,6 +31,10 @@
     width: 100%;
     margin-left: 0, auto;
     margin-top: 7.5%;
+}
+
+img {
+    padding: 2%;
 }
 
 body {

@@ -2,75 +2,75 @@ $(document).ready(function () {
 
     const cards = [
         {
-            myCard: 1,
+            cardId: 1,
             img: 'pictures/covid1.png'
         },
         {
-            myCard: 1,
+            cardId: 1,
             img: 'pictures/covid1.png'
         },
         {
-            myCard: 2,
+            cardId: 2,
             img: 'pictures/covid2.png'
         },
         {
-            myCard: 2,
+            cardId: 2,
             img: 'pictures/covid2.png'
         },
         {
-            myCard: 3,
+            cardId: 3,
             img: 'pictures/covid3.png'
         },
         {
-            myCard: 3,
+            cardId: 3,
             img: 'pictures/covid3.png'
         },
         {
-            myCard: 4,
+            cardId: 4,
             img: 'pictures/covid4.png'
         },
         {
-            myCard: 4,
+            cardId: 4,
             img: 'pictures/covid4.png'
         },
         {
-            myCard: 5,
+            cardId: 5,
             img: 'pictures/covid5.png'
         },
         {
-            myCard: 5,
+            cardId: 5,
             img: 'pictures/covid5.png'
         },
         {
-            myCard: 6,
+            cardId: 6,
             img: 'pictures/covid6.png'
         },
         {
-            myCard: 6,
+            cardId: 6,
             img: 'pictures/covid6.png'
         },
         {
-            myCard: 7,
+            cardId: 7,
             img: 'pictures/covid7.png'
         },
         {
-            myCard: 7,
+            cardId: 7,
             img: 'pictures/covid7.png'
         },
         {
-            myCard: 8,
+            cardId: 8,
             img: 'pictures/covid8.png'
         },
         {
-            myCard: 8,
+            cardId: 8,
             img: 'pictures/covid8.png'
         },
         {
-            myCard: 9,
+            cardId: 9,
             img: 'pictures/covid9.png'
         },
         {
-            myCard: 9,
+            cardId: 9,
             img: 'pictures/covid9.png'
         }
         ]
@@ -93,36 +93,39 @@ $(document).ready(function () {
     
         return cards
     }    
-    
-    init()
+ 
+
     shuffle(cards)
     
     const grid = document.querySelector('.cards')
     let cardsChosen = []
     let cardsChosenId = []
     let cardsWon = []
-    let lives = 2
+    let lives = 5
     let moves = 0
-    let minutes = 5
+    let minutes = 2
     let seconds = 00
     var gamePlaying
-    // let timeClock = document.querySelector('#timer')
+    // let timeClock = document.querySelector('#Countdown')
     // let counter = document.querySelector('#lives')
     let module = document.getElementById('menu-cover')
     
     $('#Moves').html('MOVES:' + moves)
     $('#Lives').html('LIVES:' + lives)
-    $('#timer').html('TIMER: ' + minutes + ' : ' + seconds)
+    $('#Countdown').html('Countdown: ' + minutes + ' mins' + ' , ' + seconds + ' secs')
     
     
     //create board with cards
     
     function createBoard() {
         grid.innerHTML = ""
+        document.getElementById('Lives').innerHTML = "LIVES: 5" 
+        document.getElementById('Moves').innerHTML = "MOVES: 0"
+        document.getElementById('Countdown').innterHTML = "mins: 2, secs: 00"
         cardsChosen = []
         cardsChosenId = []
         cardsWon = []
-        lives = 2
+        lives = 5
         moves = 0
         minutes = 5
         seconds = 00
@@ -136,12 +139,6 @@ $(document).ready(function () {
         
     }
 
-    //starts the game
-
-    function init() {
-        gamePlaying = true
-    }
-    
     //check for match
     
     function checkMatch() {
@@ -171,21 +168,23 @@ $(document).ready(function () {
             
         }
     }
-
+    
     //flip card
     
     function flip() {
         let cardId = this.getAttribute('data-id')
-        cardsChosen.push(cards[cardId].myCard)
+        console.log(cardId)
+        cardsChosen.push(cards[cardId].cardId)
         cardsChosenId.push(cardId)
         this.setAttribute('src', cards[cardId].img)
+        this.classList.toggle('flip')
+        console.log(this.classList.toggle('flip'))
         if (cardsChosen.length === 2) {
             setTimeout(checkMatch, 500) 
         }
     }
+
     
-    
-    
+    document.querySelector('.btn-new').addEventListener('click', createBoard) 
     createBoard()
-    
     })
