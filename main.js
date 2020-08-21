@@ -103,16 +103,15 @@ $(document).ready(function () {
     let cardsWon = []
     let lives = 5
     let moves = 0
-    let minutes = 2
+    let minutes = 1
     let seconds = 00
-    var gamePlaying
     // let timeClock = document.querySelector('#Countdown')
     // let counter = document.querySelector('#lives')
     let module = document.getElementById('menu-cover')
     
     $('#Moves').html('MOVES:' + moves)
     $('#Lives').html('LIVES:' + lives)
-    $('#Countdown').html('Countdown: ' + minutes + ' mins' + ' , ' + seconds + ' secs')
+    $('#Countdown').html('COUNTDOWN: ' + minutes + ' mins' + ', ' + seconds + '0 secs')
     
     
     //create board with cards
@@ -125,10 +124,6 @@ $(document).ready(function () {
         cardsChosen = []
         cardsChosenId = []
         cardsWon = []
-        lives = 5
-        moves = 0
-        minutes = 5
-        seconds = 00
         for (let i = 0; i < cards.length; i++) {
             let card = document.createElement('img')
             card.setAttribute('src', 'pictures/pangolin.jpg')
@@ -146,6 +141,7 @@ $(document).ready(function () {
         const optionOneId = cardsChosenId[0]
         const optionTwoId = cardsChosenId[1]
         if (cardsChosen[0] === cardsChosen[1]) {
+            moves++
             alert('You found a match')
             choice[optionOneId].setAttribute('src', 'pictures/bat.png')
             choice[optionTwoId].setAttribute('src', 'pictures/bat.png')
@@ -184,7 +180,36 @@ $(document).ready(function () {
         }
     }
 
+    //timer starts when game starts
+
+    const startingMinutes = 1
+    let time = startingMinutes * 60
+
+    const countdown = document.getElementById('Countdown')
+
+    setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+        minutes = Math.floor( time / 60 )
+        seconds = time % 60
+        console.log(minutes)
+        console.log(seconds)
+
+        seconds = seconds < 10 ? '0' + seconds : seconds
+
+        countdown.innerHTML = `COUNTDOWN: ${minutes} mins, ${seconds} secs`
+        time--
     
-    document.querySelector('.btn-new').addEventListener('click', createBoard) 
+        console.log(time)
+        if(time === 0 - 2) {
+            alert('you lose')
+            createBoard()
+        }
+        // time = time < 0 ? 0 : time
+    }
+
+   //
+    let btn = document.querySelector('.btn-new')
+    btn.addEventListener('click', createBoard) 
     createBoard()
     })
