@@ -118,9 +118,11 @@ $(document).ready(function () {
     
     function createBoard() {
         grid.innerHTML = ""
+        minutes = 1
+        seconds = 00
+        countdown.innerHTML = `COUNTDOWN: ${minutes} mins, ${seconds} secs`
         document.getElementById('Lives').innerHTML = "LIVES: 5" 
         document.getElementById('Moves').innerHTML = "MOVES: 0"
-        document.getElementById('Countdown').innterHTML = "mins: 2, secs: 00"
         cardsChosen = []
         cardsChosenId = []
         cardsWon = []
@@ -161,7 +163,7 @@ $(document).ready(function () {
         if (lives === 0) {
             alert('you lose')
             createBoard()
-            
+
         }
     }
     
@@ -192,22 +194,19 @@ $(document).ready(function () {
     function updateCountdown() {
         minutes = Math.floor( time / 60 )
         seconds = time % 60
-        console.log(minutes)
-        console.log(seconds)
 
         seconds = seconds < 10 ? '0' + seconds : seconds
 
         countdown.innerHTML = `COUNTDOWN: ${minutes} mins, ${seconds} secs`
         time--
     
-        console.log(time)
         if(time === 0 - 2) {
             alert('you lose')
             createBoard()
         }
         // time = time < 0 ? 0 : time
     }
-
+    updateCountdown()
    //
     let btn = document.querySelector('.btn-new')
     btn.addEventListener('click', createBoard) 
