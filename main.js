@@ -81,11 +81,12 @@ $(document).ready(function () {
         let currentIndex = cards.length
         var temporaryValue
         var randomIndex
-    
+        //while there remains elements to shuffle
         while (0 !== currentIndex) {
+            //pick the remaining element
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1
-    
+            //swap with current element
             temporaryValue = cards[currentIndex]
             cards[currentIndex] = cards[randomIndex]
             cards[randomIndex] = temporaryValue
@@ -95,7 +96,7 @@ $(document).ready(function () {
     }    
  
 
-    shuffle(cards)
+    let shuffledCards = shuffle(cards)
     
     const grid = document.querySelector('.cards')
     let cardsChosen = []
@@ -112,6 +113,33 @@ $(document).ready(function () {
     $('#Moves').html('MOVES:' + moves)
     $('#Lives').html('LIVES:' + lives)
     $('#Countdown').html('COUNTDOWN: ' + minutes + ' mins' + ', ' + seconds + '0 secs')
+
+    //timer starts when game starts
+
+    const startingMinutes = minutes
+    let time = startingMinutes * 60
+
+    const countdown = document.querySelector('.timer')
+
+    setInterval(startTimer, 1000);
+
+    function startTimer() {
+        minutes = Math.floor( time / 60 )
+        seconds = time % 60
+
+        seconds = seconds < 10 ? '0' + seconds : seconds
+
+        countdown.innerHTML = `COUNTDOWN: ${minutes} mins, ${seconds} secs`
+        time--
+    
+        if(time === 0 - 2) {
+            alert('you lose')
+            createBoard()
+            clearInterval(startTimer)
+        }
+        // time = time < 0 ? 0 : time
+    }
+    startTimer()
     
     
     //create board with cards
@@ -182,31 +210,7 @@ $(document).ready(function () {
         }
     }
 
-    //timer starts when game starts
 
-    const startingMinutes = 1
-    let time = startingMinutes * 60
-
-    const countdown = document.getElementById('Countdown')
-
-    setInterval(updateCountdown, 1000);
-
-    function updateCountdown() {
-        minutes = Math.floor( time / 60 )
-        seconds = time % 60
-
-        seconds = seconds < 10 ? '0' + seconds : seconds
-
-        countdown.innerHTML = `COUNTDOWN: ${minutes} mins, ${seconds} secs`
-        time--
-    
-        if(time === 0 - 2) {
-            alert('you lose')
-            createBoard()
-        }
-        // time = time < 0 ? 0 : time
-    }
-    updateCountdown()
    //
     let btn = document.querySelector('.btn-new')
     btn.addEventListener('click', createBoard) 

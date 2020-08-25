@@ -38,7 +38,8 @@ img {
 }
 
 body {
-    /* background-image: url('pictures/covidbackground.jpg'); */
+    height: 100vh;
+    /* background-image: url('/Users/tylerfrench/Desktop/PROJECTS/Memory/pictures/corona background.jpg'); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
